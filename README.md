@@ -5,3 +5,6 @@
 - springboot：新版
 - IDEA
 ### 官方：提供了一个快速生成的网站！IDEA集成了这个网站
+![][springboot-version]
+
+[springboot-version]:/image/springboot_version.jpg "springboot版本号"
