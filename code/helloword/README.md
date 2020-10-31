@@ -74,7 +74,7 @@ springboot所有的依赖都是以spring-boot-starter-开头的。
 ```shell
 java -jar ./helloword-0.0.1-SNAPSHOT.jar
 ```
-![][springboot-start.jpg]
+![][springboot-start]
 
 --------------------------------
 [springboot-start]:/image/springboot-start.jpg "springboot 启动"
