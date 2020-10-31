@@ -9,7 +9,7 @@
 - spring网站start创建项目 https://start.spring.io/
 ![][springboot-initializr]
 - 选择依赖是web：
-![][springboot-initializr]
+![][springboot-initializr-dependencies]
 
 
 
