@@ -70,4 +70,11 @@ web依赖，tomcat，dispatcherServlet，xml...如果去掉这个依赖包。项
 ```
 单元测试。  
 springboot所有的依赖都是以spring-boot-starter-开头的。  
+运行maven插件的package。会在target生成jar包。直接启动就就可以启动springboot项目。
+```shell
+java -jar ./helloword-0.0.1-SNAPSHOT.jar
+```
+![][springboot-start.jpg]
 
+--------------------------------
+[springboot-start]:/image/springboot-start.jpg "springboot 启动"
