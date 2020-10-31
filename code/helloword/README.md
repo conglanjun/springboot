@@ -36,7 +36,7 @@ public @interface SpringBootConfiguration {
 @Component
 public @interface Configuration {
 ```
-看到就是@Component本身就是spring组件。
+看到就是@Component本身就是spring组件。  
 查看pom.xml
 ```xml
 <parent>
