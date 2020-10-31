@@ -27,6 +27,19 @@ export PATH=$M2_HOME/bin:${JAVA_HOME}/bin:$PATH
 source /etc/profile
 ```
 
+### springboot项目代码
+```java
+@SpringBootApplication
+public class HellowordApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(HellowordApplication.class, args);
+    }
+
+}
+```  
+
+
 
 
 
