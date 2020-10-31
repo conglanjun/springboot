@@ -11,6 +11,18 @@
 - 选择依赖是web：  
 ![][springboot-initializr-dependencies]
 
+### 用IDEA创建
+- 下载idea
+- 下载jdk 11  
+sudo vim /etc/profile
+export M2_HOME=/home/klfy/software/apache-maven-3.6.3
+export JAVA_HOME=/home/klfy/software/jdk-11.0.9
+export CLASSPATH=.:${JAVA_HOME}/lib
+export PATH=$M2_HOME/bin:${JAVA_HOME}/bin:$PATH
+- 下载maven 3.6.3  
+同上
+source /etc/profile
+
 
 
 
