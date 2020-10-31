@@ -38,6 +38,7 @@ public class HellowordApplication {
 
 }
 ```  
+在启动类同级目录下创建controller,dao,pojo,service。会扫描这些目录的文件。  
 
 
 
