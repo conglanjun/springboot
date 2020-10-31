@@ -76,11 +76,14 @@ java -jar ./helloword-0.0.1-SNAPSHOT.jar
 ```
 ![][springboot-start]
 
---------------------------------
-[springboot-start]:/image/springboot-start.jpg "springboot 启动"
-
 在resources下的application.properties
 ```properties
 server.port=8081
 ```
 修改了服务端口。
+
+
+--------------------------------
+[springboot-start]:/image/springboot-start.jpg "springboot 启动"
+
+
