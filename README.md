@@ -42,7 +42,7 @@ public class HellowordApplication {
 ![][springboot-project-directory]
 
 创建controller详见代码。
-![helloword代码](https://github.com/conglanjun/springboot/tree/main/code/helloword "helloword")
+[helloword代码](https://github.com/conglanjun/springboot/tree/main/code/helloword "helloword")
 
 
 
