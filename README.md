@@ -8,7 +8,7 @@
 - 当前springboot的最新版：![][springboot-version]
 - spring网站start创建项目 https://start.spring.io/
 ![][springboot-initializr]
-- 选择依赖是web：
+- 选择依赖是web：  
 ![][springboot-initializr-dependencies]
 
 
