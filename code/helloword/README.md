@@ -37,3 +37,5 @@ public @interface SpringBootConfiguration {
 public @interface Configuration {
 ```
 看到就是@Component
+
+本身就是spring组件。
