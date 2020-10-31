@@ -54,5 +54,20 @@ public @interface Configuration {
          <artifactId>spring-boot-starter-web</artifactId>
 </dependency>
 ```
-web依赖，tomcat，dispatcherServlet，xml...如果去掉这个依赖包。项目中@SpringBootApplication报红。  
+web依赖，tomcat，dispatcherServlet，xml...如果去掉这个依赖包。项目中@SpringBootApplication报红。
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-test</artifactId>
+    <scope>test</scope>
+    <exclusions>
+	<exclusion>
+	    <groupId>org.junit.vintage</groupId>
+	    <artifactId>junit-vintage-engine</artifactId>
+	</exclusion>
+    </exclusions>
+</dependency>
+```
+单元测试。  
+都是以spring-boot-starter-开头的。  
 
