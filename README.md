@@ -44,6 +44,8 @@ public class HellowordApplication {
 创建controller详见代码。看具体springboot自动启动内容去子项目查看。  
 [helloword代码](https://github.com/conglanjun/springboot/tree/main/code/helloword "helloword")
 
+### [springboot自动装配原理](https://github.com/conglanjun/springboot/tree/main/code/autoConfiguration.md)
+
 
 
 
