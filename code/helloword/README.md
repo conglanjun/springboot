@@ -46,4 +46,13 @@ public @interface Configuration {
 	<relativePath/> <!-- lookup parent from repository -->
 </parent>
 ```
-有一个父项目
+有一个父项目。  
+看下依赖
+```xml
+<dependency>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+```
+web依赖，tomcat，dispatcherServlet，xml...如果去掉这个依赖包。项目中@SpringBootApplication报红。  
+
