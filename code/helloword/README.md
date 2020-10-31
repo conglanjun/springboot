@@ -69,5 +69,5 @@ web依赖，tomcat，dispatcherServlet，xml...如果去掉这个依赖包。项
 </dependency>
 ```
 单元测试。  
-都是以spring-boot-starter-开头的。  
+springboot所有的依赖都是以spring-boot-starter-开头的。  
 
