@@ -39,6 +39,8 @@ public class HellowordApplication {
 }
 ```  
 在启动类同级目录下创建controller,dao,pojo,service。会扫描这些目录的文件。  
+![][springboot-project-directory]
+
 
 
 
@@ -57,3 +59,4 @@ public class HellowordApplication {
 [springboot-version]:/image/springboot_version.jpg "springboot版本号"
 [springboot-initializr]:/image/springboot-initializr.jpg "springboot initializr"
 [springboot-initializr-dependencies]:/image/springboot-initializr-dependencies.jpg "springboot initializr dependencies"
+[springboot-project-directory]:/image/springboot-project-directory.jpg "springboot initializr dependencies"
