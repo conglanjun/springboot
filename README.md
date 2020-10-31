@@ -1,6 +1,6 @@
 ## 第一个springboot程序
 ### 环境
-- jdk 1.8
+- jdk 11
 - maven 3.6.1
 - springboot：新版
 - IDEA
