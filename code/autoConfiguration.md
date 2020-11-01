@@ -63,6 +63,7 @@
 - 我们要使用什么功能，就找到对应的启动器就行了。`starter`。
 可以去官网看Dependency Versions会有很多依赖jar包。还可以找到`starter`
 ![][springboot-starter]
+
 ---
 
 [springboot-starter]:/image/springboot-starter.jpg "springboot starter"
