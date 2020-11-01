@@ -34,4 +34,10 @@
 - 我们在写或者引入springboot依赖的时候不需要写版本，就因为有版本仓库。
 
 #### 启动器
-
+- ```shell
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter</artifactId>
+</dependency>
+```
+- springboot启动器。就是springboot的启动场景。
