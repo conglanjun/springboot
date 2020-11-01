@@ -122,17 +122,17 @@ public @interface AutoConfigurationPackage {
 ```java
 static class Registrar implements ImportBeanDefinitionRegistrar, DeterminableImports {
 
-		@Override
-		public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry) {
-			register(registry, new PackageImports(metadata).getPackageNames().toArray(new String[0]));
-		}
-
-		@Override
-		public Set<Object> determineImports(AnnotationMetadata metadata) {
-			return Collections.singleton(new PackageImports(metadata));
-		}
-
+	@Override
+	public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry) {
+		register(registry, new PackageImports(metadata).getPackageNames().toArray(new String[0]));
 	}
+
+	@Override
+	public Set<Object> determineImports(AnnotationMetadata metadata) {
+		return Collections.singleton(new PackageImports(metadata));
+	}
+
+}
 ```
 要注册这些元数据metadata，PackageImports导入这些包。暂时放在这里。
 回看@EnableAutoConfiguration还有个@Import(AutoConfigurationImportSelector.class)选择器。点击AutoConfigurationImportSelector类  
@@ -140,41 +140,52 @@ static class Registrar implements ImportBeanDefinitionRegistrar, DeterminableImp
 public class AutoConfigurationImportSelector implements DeferredImportSelector, BeanClassLoaderAware,
 		ResourceLoaderAware, BeanFactoryAware, EnvironmentAware, Ordered {
 
-	...
+...
 
-	private ResourceLoader resourceLoader;
+private ResourceLoader resourceLoader;
 
-	private ConfigurationClassFilter configurationClassFilter;
+private ConfigurationClassFilter configurationClassFilter;
 
-	@Override
-	public String[] selectImports(AnnotationMetadata annotationMetadata) {
-		if (!isEnabled(annotationMetadata)) {
-			return NO_IMPORTS;
-		}
-		AutoConfigurationEntry autoConfigurationEntry = getAutoConfigurationEntry(annotationMetadata);
-		return StringUtils.toStringArray(autoConfigurationEntry.getConfigurations());
+@Override
+public String[] selectImports(AnnotationMetadata annotationMetadata) {
+	if (!isEnabled(annotationMetadata)) {
+		return NO_IMPORTS;
 	}
+	AutoConfigurationEntry autoConfigurationEntry = getAutoConfigurationEntry(annotationMetadata);
+	return StringUtils.toStringArray(autoConfigurationEntry.getConfigurations());
+}
 ```
 有个selectImports选择组件。会选择项目中pom.xml配置的比如spring-boot-starter-web这些东西。
 
 ```java
 protected AutoConfigurationEntry getAutoConfigurationEntry(AnnotationMetadata annotationMetadata) {
-		if (!isEnabled(annotationMetadata)) {
-			return EMPTY_ENTRY;
-		}
-		AnnotationAttributes attributes = getAttributes(annotationMetadata);
-		List<String> configurations = getCandidateConfigurations(annotationMetadata, attributes);
-		configurations = removeDuplicates(configurations);
-		Set<String> exclusions = getExclusions(annotationMetadata, attributes);
-		checkExcludedClasses(configurations, exclusions);
-		configurations.removeAll(exclusions);
-		configurations = getConfigurationClassFilter().filter(configurations);
-		fireAutoConfigurationImportEvents(configurations, exclusions);
-		return new AutoConfigurationEntry(configurations, exclusions);
+	if (!isEnabled(annotationMetadata)) {
+		return EMPTY_ENTRY;
 	}
+	AnnotationAttributes attributes = getAttributes(annotationMetadata);
+	List<String> configurations = getCandidateConfigurations(annotationMetadata, attributes);
+	configurations = removeDuplicates(configurations);
+	Set<String> exclusions = getExclusions(annotationMetadata, attributes);
+	checkExcludedClasses(configurations, exclusions);
+	configurations.removeAll(exclusions);
+	configurations = getConfigurationClassFilter().filter(configurations);
+	fireAutoConfigurationImportEvents(configurations, exclusions);
+	return new AutoConfigurationEntry(configurations, exclusions);
+}
 ```
 List<String> configurations = getCandidateConfigurations(annotationMetadata, attributes);获取所有的配置。
+获取候选配置函数
+```java
+protected List<String> getCandidateConfigurations(AnnotationMetadata metadata, AnnotationAttributes attributes) {
+	List<String> configurations = SpringFactoriesLoader.loadFactoryNames(getSpringFactoriesLoaderFactoryClass(),
+			getBeanClassLoader());
+	Assert.notEmpty(configurations, "No auto configuration classes found in META-INF/spring.factories. If you "
+			+ "are using a custom packaging, make sure that file is correct.");
+	return configurations;
+}
+```
 
+---
 
 关系是：
 @SpringBootConfiguration：
