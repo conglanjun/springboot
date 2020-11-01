@@ -43,3 +43,19 @@
 ```
 - springboot启动器。就是springboot的启动场景。
 - 比如spring-boot-starter-web，他会帮我们自动导入web环境所有的依赖。
+- spring-boot会把所有的功能场景都变成一个个的启动器。
+- 再看一下spring-boot-dependencies-xxx.pom文件
+```xml
+<properties>
+    <activemq.version>5.15.13</activemq.version>
+    <antlr2.version>2.7.7</antlr2.version>
+    <appengine-sdk.version>1.9.82</appengine-sdk.version>
+    <artemis.version>2.12.0</artemis.version>
+    <aspectj.version>1.9.6</aspectj.version>
+    <assertj.version>3.16.1</assertj.version>
+    <atomikos.version>4.0.6</atomikos.version>
+    <awaitility.version>4.0.3</awaitility.version>
+    <bitronix.version>2.1.4</bitronix.version>
+  ...
+```
+里面有很多版本依赖。
