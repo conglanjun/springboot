@@ -196,7 +196,39 @@ protected List<String> getCandidateConfigurations(AnnotationMetadata metadata, A
 - @AutoConfigurationPackage:  
   - @Import(AutoConfigurationPackages.Registrar.class) 自动配置`包注册`。这与规定包要在springboot启动类下面文件夹有关系。  
   - @Import(AutoConfigurationImportSelector.class) 自动配置导入选择。  
+  
+```java
+List<String> configurations = getCandidateConfigurations(annotationMetadata, attributes); // 获取候选配置
+```
+看下函数
+```java
+protected List<String> getCandidateConfigurations(AnnotationMetadata metadata, AnnotationAttributes attributes) {
+	List<String> configurations = SpringFactoriesLoader.loadFactoryNames(getSpringFactoriesLoaderFactoryClass(),
+			getBeanClassLoader());
+	Assert.notEmpty(configurations, "No auto configuration classes found in META-INF/spring.factories. If you "
+			+ "are using a custom packaging, make sure that file is correct.");
+	return configurations;
+}
 
+protected Class<?> getSpringFactoriesLoaderFactoryClass() {
+	return EnableAutoConfiguration.class;
+}
+```
+getSpringFactoriesLoaderFactoryClass函数返回EnableAutoConfiguration.class。我们能看到
+```java
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Inherited
+@SpringBootConfiguration
+@EnableAutoConfiguration // SpringBootApplication注解中有EnableAutoConfiguration注解
+@ComponentScan(excludeFilters = { @Filter(type = FilterType.CUSTOM, classes = TypeExcludeFilter.class),
+		@Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) })
+public @interface SpringBootApplication {
+```
+因此启动类下的所有资源被导入。  
+getCandidateConfigurations函数中有提到META-INF/spring.factories，它是自动配置的和核心文件。  
+是在org.springframework.boot:spring-boot-autoconfigure:2.3.5.RELEASE下的META-INF中的spring.factories文件。
 ---
 
 [springboot-starter]:/image/springboot-starter.jpg "springboot starter"
