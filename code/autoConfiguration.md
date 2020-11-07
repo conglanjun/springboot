@@ -188,9 +188,9 @@ protected List<String> getCandidateConfigurations(AnnotationMetadata metadata, A
 ---
 
 关系是：
->@SpringBootConfiguration：
->>@Configuration
->>@Component
+>@SpringBootConfiguration：  
+>>@Configuration  
+>>@Component  
 >@EnableAutoConfiguration:  
 >>@AutoConfigurationPackage:  
 >>>>@Import(AutoConfigurationPackages.Registrar.class) 自动配置`包注册`。这与规定包要在springboot启动类下面文件夹有关系。  
