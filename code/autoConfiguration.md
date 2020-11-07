@@ -226,9 +226,105 @@ getSpringFactoriesLoaderFactoryClass函数返回EnableAutoConfiguration.class。
 		@Filter(type = FilterType.CUSTOM, classes = AutoConfigurationExcludeFilter.class) })
 public @interface SpringBootApplication {
 ```
+
 因此启动类下的所有资源被导入。  
 getCandidateConfigurations函数中有提到META-INF/spring.factories，它是自动配置的和核心文件。  
 是在org.springframework.boot:spring-boot-autoconfigure:2.3.5.RELEASE下的META-INF中的spring.factories文件。
+```factories
+# Initializers
+org.springframework.context.ApplicationContextInitializer=\
+org.springframework.boot.autoconfigure.SharedMetadataReaderFactoryContextInitializer,\
+org.springframework.boot.autoconfigure.logging.ConditionEvaluationReportLoggingListener
+
+# Application Listeners
+org.springframework.context.ApplicationListener=\
+org.springframework.boot.autoconfigure.BackgroundPreinitializer
+
+# Auto Configuration Import Listeners
+org.springframework.boot.autoconfigure.AutoConfigurationImportListener=\
+org.springframework.boot.autoconfigure.condition.ConditionEvaluationReportAutoConfigurationImportListener
+
+# Auto Configuration Import Filters
+org.springframework.boot.autoconfigure.AutoConfigurationImportFilter=\
+org.springframework.boot.autoconfigure.condition.OnBeanCondition,\
+org.springframework.boot.autoconfigure.condition.OnClassCondition,\
+org.springframework.boot.autoconfigure.condition.OnWebApplicationCondition
+
+# Auto Configure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration,\
+```
+
+有初始化，监听的，自动导入包，自动配置。比如找到了org.springframework.boot.autoconfigure.web.servlet.WebMvcAutoConfiguration点进去看到
+```java
+@Configuration(proxyBeanMethods = false)
+@ConditionalOnWebApplication(type = Type.SERVLET)
+@ConditionalOnClass({ Servlet.class, DispatcherServlet.class, WebMvcConfigurer.class })
+@ConditionalOnMissingBean(WebMvcConfigurationSupport.class)
+@AutoConfigureOrder(Ordered.HIGHEST_PRECEDENCE + 10)
+@AutoConfigureAfter({ DispatcherServletAutoConfiguration.class, TaskExecutionAutoConfiguration.class,
+		ValidationAutoConfiguration.class })
+public class WebMvcAutoConfiguration {
+```
+
+是个Java配置类。  
+```java
+protected List<String> getCandidateConfigurations(AnnotationMetadata metadata, AnnotationAttributes attributes) {
+	List<String> configurations = SpringFactoriesLoader.loadFactoryNames(getSpringFactoriesLoaderFactoryClass(),
+			getBeanClassLoader());
+	Assert.notEmpty(configurations, "No auto configuration classes found in META-INF/spring.factories. If you "
+			+ "are using a custom packaging, make sure that file is correct.");
+	return configurations;
+}
+```
+可以看到loadFactoryNames在SpringFactoriesLoader类中
+```java
+public static List<String> loadFactoryNames(Class<?> factoryType, @Nullable ClassLoader classLoader) {
+	String factoryTypeName = factoryType.getName();
+	return loadSpringFactories(classLoader).getOrDefault(factoryTypeName, Collections.emptyList());
+}
+
+private static Map<String, List<String>> loadSpringFactories(@Nullable ClassLoader classLoader) {
+	MultiValueMap<String, String> result = cache.get(classLoader);
+	if (result != null) {
+		return result;
+	}
+
+	try {
+		Enumeration<URL> urls = (classLoader != null ?
+				classLoader.getResources(FACTORIES_RESOURCE_LOCATION) :
+				ClassLoader.getSystemResources(FACTORIES_RESOURCE_LOCATION));
+		result = new LinkedMultiValueMap<>();
+		while (urls.hasMoreElements()) {
+			URL url = urls.nextElement();
+			UrlResource resource = new UrlResource(url);
+			Properties properties = PropertiesLoaderUtils.loadProperties(resource);
+			for (Map.Entry<?, ?> entry : properties.entrySet()) {
+				String factoryTypeName = ((String) entry.getKey()).trim();
+				for (String factoryImplementationName : StringUtils.commaDelimitedListToStringArray((String) entry.getValue())) {
+					result.add(factoryTypeName, factoryImplementationName.trim());
+				}
+			}
+		}
+		cache.put(classLoader, result);
+		return result;
+	}
+	catch (IOException ex) {
+		throw new IllegalArgumentException("Unable to load factories from location [" +
+				FACTORIES_RESOURCE_LOCATION + "]", ex);
+	}
+}
+```
+loadSpringFactories会加载资源。  
+Properties properties = PropertiesLoaderUtils.loadProperties(resource);把URL加载到properties里面。也就是所有资源加载到配置类中。  
+然后cache.put(classLoader, result);被put到缓存里面。点FACTORIES_RESOURCE_LOCATION  
+```java
+public static final String FACTORIES_RESOURCE_LOCATION = "META-INF/spring.factories";
+```
+
+看到的就是刚才的配置文件。载入了自动配置类。
+
+
 ---
 
 [springboot-starter]:/image/springboot-starter.jpg "springboot starter"
