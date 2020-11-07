@@ -187,7 +187,7 @@ protected List<String> getCandidateConfigurations(AnnotationMetadata metadata, A
 
 ---
 
-关系是：
+关系是：  
 @SpringBootConfiguration：  
   @Configuration  
 >>@Component  
