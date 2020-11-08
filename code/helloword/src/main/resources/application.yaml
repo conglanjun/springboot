@@ -1,0 +1,14 @@
+person:
+  name: lanjunc${random.uuid}
+  age: ${random.int}
+  happy: false
+  birth: 2019/11/02
+  maps: {k1: v1, k2: v2}
+  hello: lalala
+  lists:
+    - code
+    - music
+    - girl
+  dog:
+    name: ${person.hello:hello}_WangCai
+    age: 3
