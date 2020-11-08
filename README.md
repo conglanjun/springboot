@@ -48,6 +48,8 @@ public class HellowordApplication {
 
 ### [springboot自动启动原理](https://github.com/conglanjun/springboot/tree/main/code/autoRun.md)
 
+### [springboot给属性赋值几种方式](https://github.com/conglanjun/springboot/tree/main/code/valueAssign.md)
+
 
 
 
