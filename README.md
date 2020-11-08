@@ -46,6 +46,10 @@ public class HellowordApplication {
 
 ### [springboot自动装配原理](https://github.com/conglanjun/springboot/tree/main/code/autoConfiguration.md)
 
+### [springboot自动启动原理](https://github.com/conglanjun/springboot/tree/main/code/autoRun.md)
+
+
+
 
 
 
