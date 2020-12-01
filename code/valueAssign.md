@@ -194,9 +194,39 @@ Person{name='lanjunc4b8e5a36-18a2-43ec-8829-b4152db19656', age=741211421, happy=
 
 ### 多环境配置文件位置
 
-1.file:./config/ （在springboot项目目录下创建config目录，里面创建application.yaml配置文件）  
-2.file:.  （在springboot项目目录下创建application.yaml配置文件）  
-3.classpath:/config/ （在项目的resources下创建config目录，里面创建application.yaml配置文件）  
-4.classpath:/ （在项目的resources下创建application.yaml配置文件）  
+1.file:./config/ （在springboot项目目录下创建config目录，里面创建application.yaml配置文件） `优先级最高`  
+2.file:.  （在springboot项目目录下创建application.yaml配置文件） `优先级第二`  
+3.classpath:/config/ （在项目的resources下创建config目录，里面创建application.yaml配置文件） `优先级第三`  
+4.classpath:/ （在项目的resources下创建application.yaml配置文件） `优先级第四`  
+当项目中有开发环境配置application-dev.properties，还有测试环境配置application-test.properties，默认的application.properties。  
+在application.properties
+```properties
+# spring的多环境配置：可以选择激活哪一个配置文件
+spring.profiles.active=test
+```
+则运行走的就是application-test.properties配置文件。  
+
+还是比较麻烦的，用yaml  
+用`---` 分模块
+```yaml
+server:
+  port: 8081
+spring:
+  profiles:
+    active: dev # 配置dev就会走下面dev的模块设置，port为8082，如果这里不写，则走默认的8081。
+  
+---
+
+server:
+  port: 8082
+spring:
+  profiles: dev
+---
+server:
+  port: 8083
+spring:
+  profiles: test
+```
+yaml一个文件可以当多个properties文件用。用`---` 横杠分割。  
 
 
