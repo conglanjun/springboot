@@ -191,3 +191,10 @@ person:
 Person{name='lanjunc4b8e5a36-18a2-43ec-8829-b4152db19656', age=741211421, happy=false, birth=Sat Nov 02 00:00:00 CST 2019, maps={k1=v1, k2=v2}, lists=[code, music, girl], dog=Dog{name='lalala_WangCai', age=3}}
 ```
 配置文件中能写这样的判断，代码中可以少写很多。
+
+### 多环境配置文件位置
+
+1.file:./config/
+2.file:.
+3.classpath:/config/
+4.classpath:/
