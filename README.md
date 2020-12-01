@@ -48,7 +48,7 @@ public class HellowordApplication {
 
 ### [springboot自动启动原理](https://github.com/conglanjun/springboot/tree/main/code/autoRun.md)
 
-### [springboot给属性赋值几种方式和JSR303](https://github.com/conglanjun/springboot/tree/main/code/valueAssign.md)
+### [springboot给属性赋值几种方式、多环境配置、自动配置在理解](https://github.com/conglanjun/springboot/tree/main/code/valueAssign.md)
 
 
 
