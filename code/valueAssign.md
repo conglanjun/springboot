@@ -194,7 +194,9 @@ Person{name='lanjunc4b8e5a36-18a2-43ec-8829-b4152db19656', age=741211421, happy=
 
 ### 多环境配置文件位置
 
-1.file:./config/
-2.file:.
-3.classpath:/config/
-4.classpath:/
+1.file:./config/  
+2.file:.  
+3.classpath:/config/  
+4.classpath:/  
+
+
