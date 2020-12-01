@@ -194,9 +194,9 @@ Person{name='lanjunc4b8e5a36-18a2-43ec-8829-b4152db19656', age=741211421, happy=
 
 ### 多环境配置文件位置
 
-1.file:./config/ （）在springboot项目目录下创建config目录，里面创建application.yaml配置文件）  
+1.file:./config/ （在springboot项目目录下创建config目录，里面创建application.yaml配置文件）  
 2.file:.  （在springboot项目目录下创建application.yaml配置文件）  
 3.classpath:/config/ （在项目的resources下创建config目录，里面创建application.yaml配置文件）  
-4.classpath:/ （在项目的resources下创建）  
+4.classpath:/ （在项目的resources下创建application.yaml配置文件）  
 
 
